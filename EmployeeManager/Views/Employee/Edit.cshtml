@@ -1,0 +1,19 @@
+@model EmployeeVM
+<div class="form-group">
+    <form asp-action="Create" method="POST">
+        <input type="hidden" asp-for="Id">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input class="form-control" type="text" asp-for="LastName">
+        <span asp-validation-for="LastName"></span>
+        <input class="form-control" type="text" asp-for="Weight">
+        <span asp-validation-for="Weight"></span>
+        <select class="form-control" asp-items="@Model.Positions" asp-for="PositionId"></select>
+        <span asp-validation-for="PositionId"></span>
+        <button class="form-control" type="submit">Сохранить</button>
+        @if (Model.Id > 0)
+        {
+            <button class="form-control" type="submit" asp-action="@nameof(EmployeeController.Delete)"
+            asp-route-id="@Model.Id">Удалить</button>
+        }
+    </form>
+</div>

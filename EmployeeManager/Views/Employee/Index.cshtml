@@ -1,0 +1,31 @@
+@model EmployeeListVM
+<div class="form-group">
+    <form method="GET" asp-action="@nameof(EmployeeController.Index)">
+        <select class="form-control" asp-items="@Model.Positions" asp-for="PositionId"></select>
+
+        <button class="form-control" type="submit">Искать</button>
+    </form>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="@nameof(EmployeeController.Edit)">Добавить</a>
+</div>
+<div class="container">
+
+    @foreach (var employee in Model.Employees)
+    {
+        <div class="row">
+            <div class="col">@employee.Id</div>
+            <div class="col">@employee.LastName</div>
+            <div class="col"><a class="btn btn-primary" asp-action="@nameof(EmployeeController.Edit)"
+                asp-route-id="@employee.Id">Редактировать</a></div>
+
+        </div>
+    }
+</div>
+<div>
+    @for (var index = 1; index <= Model.MaxPage; index++)
+    {
+        <a class="btn btn-outline-primary" asp-action="@nameof(EmployeeController.Index)" asp-route-Page="@index"
+        asp-route-PageSize="@Model.PageSize" asp-route-PositionId="@Model.PositionId">@index</a>
+    }
+</div>
