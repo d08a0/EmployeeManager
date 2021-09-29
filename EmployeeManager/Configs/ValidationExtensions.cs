@@ -13,7 +13,7 @@ namespace EmployeeManager.Configs
             var cfg = services.BuildServiceProvider().GetService<ValidationConfig>();
             if (cfg.Enabled)
             {
-                services = services.AddFluentValidation(configurationExpression);
+                services.AddFluentValidation(configurationExpression);
             }
             return services;
         }
